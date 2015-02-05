@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style>
+  html {
+
+  }
+  body {
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 微软雅黑;
+    font-size: 15px;
+  }
+  .container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .red {
+    border: 3px rgba(242, 0, 0, 0.4) solid;
+  }
+  .blue {
+    border: 3px solid rgb(134, 191, 255);
+  }
+  .item {
+    border: 3px solid rgb(134, 191, 255);
+    line-height: 20px;
+  }
+  .use {
+    color: rgb(199, 128, 128);
+    border-left: 6px solid rgba(249, 255, 197, 1);
+    padding-left: 5px;
+  }
+  .tag {
+    display: inline-block;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    background-color: rgb(189, 239, 197);
+    padding: 5px;
+    border-radius: 5px;
+    -webkit-transform: rotate(-30deg);
+  }
+  .sign {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: rgb(232, 227, 227);
+    font-size: 18px;
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(-10deg);
+  }
+  pre {
+    position: relative;
+    background-color: rgba(10,194,210,.8);
+    border-top: 10px solid rgba(92, 117, 169, 1);
+    color: #fff;
+    padding: 20px 10px 5px;
+    line-height: 20px;
+    space-wrap: warp;
+    margin-bottom: 25px;
+  }
+  pre.red {
+    border: none;
+    border-top: 10px solid rgba(231, 105, 158, 1);
+  }
+  pre.green {
+    border-top: 10px solid rgba(138, 219, 148, 1);
+  }
+</style>
+<body>
+  <pre>
+    内容: 这是关于flex布局的具体属性值实现的Demo
+         本文供初学者入门，高学者指教
+    作者: Arvo
+    email: 250185087@qq.com
+    github: <a href="https://github.com/ArvoGuo/blog" target="_blank">https://github.com/ArvoGuo/blog</a>
+  </pre>
+  <pre>
+    说明: <span class="red">红色表示容器</span>，<span class="blue">蓝色表示容器中的子元素</span>
+          通用元素的类
+          .container {
+            margin-bottom: 20px;
+          }
+          .red {
+            border: 2px red solid;
+          }
+          .blue {
+            border: 3px solid rgb(134, 191, 255);
+          }
+          .item {
+            border: 3px solid rgb(134, 191, 255);
+            line-height: 20px;
+          }
+    提示: <span style="text-decoration:underline">本文重点在于flex的实现，忽略兼容性，请使用最新Chrome查看效果</span>
+  </pre>
+  <pre>
+    <span class="use">目录</span>
+    <a href="#part-1">范例1: diaplay: block</a>
+    <a href="#part-2">范例2: display: flex</a>
+    <a href="#part-3">范例3: flex-direction: row</a>
+    <a href="#part-4">范例4: flex-direction: row-reverse</a>
+    <a href="#part-5">范例5: flex-direction: column</a>
+    <a href="#part-6">范例6: flex-direction: column-reverse</a>
+    <a href="#part-7">范例7: flex-direction: row;flex-wrap: warp</a>
+    <a href="#part-8">范例8: flex-direction: row;flex-wrap: wrap-reverse</a>
+    <a href="#part-9">范例9: flex-direction: column;flex-wrap: warp</a>
+    <a href="#part-10">范例10: flex-direction: column;flex-wrap: warp-reverse</a>
+    <a href="#part-11">范例11: flex-flow: column wrap</a>
+    <a href="#part-12">范例12: order</a>
+    <a href="#part-13">范例13: flex: 1</a>
+    <a href="#part-14">范例14: flex: initial</a>
+    <a href="#part-15">范例15: flex: auto</a>
+    <a href="#part-16">范例16: flex: none</a>
+    <a href="#part-17">范例17: flex: 1; flex: 2</a>
+    <a href="#part-17.5">范例17.5: margin-left: auto</a>
+    <a href="#part-18">范例18: justify-content: flex-start</a>
+    <a href="#part-19">范例19: justify-content: flex-end</a>
+    <a href="#part-20">范例20: justify-content: center</a>
+    <a href="#part-21">范例21: justify-content: space-between</a>
+    <a href="#part-22">范例22: justify-content: space-around</a>
+    <a href="#part-23">范例23: align-items: flex-start</a>
+    <a href="#part-24">范例24: align-items: flex-end</a>
+    <a href="#part-25">范例25: align-items: center</a>
+    <a href="#part-26">范例26: align-items: baseline</a>
+    <a href="#part-27">范例27: align-items: stretch</a>
+    <a href="#part-28">范例28: align-self</a>
+    <a href="#part-29">范例29: align-content: flex-start</a>
+    <a href="#part-30">范例30: align-content: flex-start;flex-flow: row wrap;</a>
+    <a href="#part-31">范例31: align-content: flex-end;flex-flow: row wrap;</a>
+    <a href="#part-32">范例32: align-content: center;flex-flow: row wrap;</a>
+    <a href="#part-33">范例33: align-content: baseline;flex-flow: row wrap;</a>
+    <a href="#part-34">范例34: align-content: stretch;flex-flow: row wrap;</a>
+    <a href="#part-35">范例35: align-content: space-around;flex-flow: row wrap;</a>
+    <a href="#part-36">范例36: align-content: space-between;flex-flow: row wrap;</a>
+  </pre>
+  <pre class="red">
+    首先，先用flex实现水平且垂直居中效果
+    假设条件: 有一个父级容器，宽度100%，高度200px
+             容器内有一个子元素，希望能够自适应的居中
+  </pre>
+  <pre class="green">
+    第一种方式:
+      div.container
+        display: flex
+        width: 100%
+        height: 200px
+        justify-content:center
+        align-items: center
+      div.div.item
+        none
+  </pre>
+  <div class="red container" style="display: flex; width: 100%;height: 200px;justify-content:center;align-items: center">
+    <div class="item">我的英文名字叫Arvo</div>
+  </div>
+  <pre class="green">
+    第二种方式
+      div.container
+        display: flex
+        width: 100%
+        height: 200px
+        justify-content: center
+      div.item
+        align-self: center
+  </pre>
+  <div class="red container" style="display: flex; width: 100%;height: 200px;justify-content:center;">
+    <div class="item" style="align-self:center">我的英文名字叫Arvo<br>我的英文名字叫Arvo</div>
+  </div>
+  <pre class="red">
+    接下来是关于flex容器和子元素具体属性的实现，也是对效果的整理.
+  </pre>
+  <pre class="green">
+    <span id="part-1">范例1:</span>
+      正常容器效果
+      div.container
+        display: block
+      div.item*5
+        none
+  </pre>
+  <div class="red container" style="display: block">
+    <span class="tag">
+      范例1
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="green">
+    <span id="part-2">范例2:</span>
+      <span class="use">display: flex</span>
+      使容器成为伸缩容器
+      div.container
+        display: flex
+      div.item*5
+        none
+  </pre>
+  <div class="red container" style="display: flex">
+    <span class="tag">
+      范例2
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="red">
+    <span class="use">flex-direction: row </span>
+    <span class="use">flex-direction: row-reverse </span>
+    <span class="use">flex-direction: column </span>
+    <span class="use">flex-direction: column-reverse </span>
+  </pre>
+  <pre class="green">
+    <span id="part-3">范例3:</span>
+      <span class="use">flex-direction: row , 表示水平方向</span>
+      为伸缩容器加入主轴方向
+      div.container
+        display: flex;
+        flex-direction:: row
+      div.item*5
+        none
+  </pre>
+  <div class="red container" style="display: flex;flex-direction: row">
+    <span class="tag">
+      范例3
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="green">
+    <span id="part-4">范例4:</span>
+      <span class="use">flex-direction: row-reverse , 表示水平相反方向</span>
+      为伸缩容器加入主轴方向
+      div.container
+        display: flex
+        flex-direction: row-reverse
+      div.item*5
+        none
+  </pre>
+  <div class="red container" style="display: flex;flex-direction: row-reverse">
+    <span class="tag">
+      范例4
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="green">
+    <span id="part-5">范例5:</span>
+      <span class="use">flex-direction: column, 表示垂直方向</span>
+      为伸缩容器加入主轴方向
+      div.container
+        display: flex
+        flex-direction: column
+      div.item*5
+        none
+  </pre>
+  <div class="red container" style="display: flex;flex-direction: column">
+    <span class="tag">
+      范例5
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="green">
+    <span id="part-6">范例6:</span>
+      <span class="use">flex-direction: column-reverse, 表示垂直相反方向</span>
+      为伸缩容器加入主轴方向
+      div.container
+        display: flex
+        flex-direction: column-reverse
+      div.item*5
+        none
+  </pre>
+  <div class="red container" style="display: flex;flex-direction: column-reverse">
+    <span class="tag">
+      范例6
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="red">
+    <span class="use">flex-wrap: wrap</span>
+    <span class="use">flex-wrap: wrap-reverse</span>
+    wrap用来设置换行，注意，这是对子元素的换行。有两种情况，主轴方向水平和垂直两种情况，
+    当为水平方向时，我们需要限定伸缩容器的宽度，才会触发换行的效果
+    当为垂直方向时，我们需要限定伸缩容器的高度，才会触发换行的效果
+    来看一下分别的效果
+  </pre>
+  <pre class="green">
+    <span id="part-7">范例7:</span>
+      div.container
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        width: 400px
+  </pre>
+  <div class="red container" style="display: flex;flex-direction: row;flex-wrap:wrap;width: 400px">
+    <span class="tag">
+      范例7
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="green">
+    <span id="part-8">范例8:</span>
+      div.container
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap-reverse
+        width: 400px
+  </pre>
+  <div class="red container" style="display: flex;flex-direction: row;flex-wrap:wrap-reverse;width: 400px">
+    <span class="tag">
+      范例8
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="green">
+    <span id="part-9">范例9:</span>
+      div.container
+        display: flex
+        flex-direction: column
+        flex-wrap: wrap
+        height: 80px
+  </pre>
+  <div class="red container" style="display: flex;flex-direction: column;flex-wrap:wrap;height: 80px">
+    <span class="tag">
+      范例9
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="green">
+    <span id="part-10">范例10:</span>
+      div.container
+        display: flex
+        flex-direction: column
+        flex-wrap: wrap-reverse
+        height: 80px
+  </pre>
+  <div class="red container" style="display: flex;flex-direction: column;flex-wrap:wrap-reverse;height: 80px">
+    <span class="tag">
+      范例10
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <h3>
+
+  </h3>
+  <pre class="red">
+    <span class="use">‘flex-flow’ 屬性是同時設定 ‘flex-direction’ 與 ‘flex-wrap’ 屬性的縮寫，兩個屬性決定了伸縮容器的主軸與側軸。</span>
+  </pre>
+  <pre class="green">
+    <span id="part-11">范例11:</span>
+      <span class="use">flex-flow: column wrap</span>
+      div.container
+        display: flex
+        flex-flow: column wrap
+        height: 80px
+  </pre>
+  <div class="red container" style="display: flex;flex-flow:column wrap; height: 80px">
+    <span class="tag">
+      范例11
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111</div>
+    <div class="item">222222222222222</div>
+    <div class="item">333333333333333</div>
+    <div class="item">444444444444444</div>
+    <div class="item">555555555555555</div>
+  </div>
+  <pre class="red">
+  <span class="use">order, 写在子元素的css上，设置该元素在伸缩容器中显示的顺序</span>
+  </pre>
+  <pre class="green">
+    <span id="part-12">范例12:</span>
+      div.container
+        display: flex
+      div.item-1111
+        order: 3
+      div.item-2222
+        order: 2
+      div.item-3333
+        order: 1
+  </pre>
+  <div class="red container" style="display: flex;">
+    <span class="tag">
+      范例12
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="order: 3">111111111111111</div>
+    <div class="item" style="order: 2">222222222222222</div>
+    <div class="item" style="order: 1">333333333333333</div>
+  </div>
+  <pre class="red">
+    <span class="use">flex, 写在子元素的css上</span>
+    <span class="use">'flex-grow' 'flex-shrink' 'flex-basis' , 值有三个，具体的含义我也解释不懂 - - ，还是看看效果先吧</span>
+    <span class="use">几个特殊取值的表示</span>
+    <span class="use">flex: initial  ==  flex: 0 1 auto</span>
+    <span class="use">flex: auto     ==  flex: 0 0 auto</span>
+    <span class="use">flex: none     ==  flex: 0 0 auto</span>
+    <span class="use">flex: 数字      ==  flex: 数字 1 0%</span>
+  </pre>
+  <pre class="green">
+    <span id="part-13">范例13:</span>
+      <span class="use">比较常用的是在子元素上加 flex: 1,该元素会充分利用剩余空间</span>
+      div.container
+        display: flex
+      div.item-1111
+        flex: 1
+      div.item-2222
+        none
+      div.item-3333
+        none
+  </pre>
+  <div class="red container" style="display: flex;">
+    <span class="tag">
+      范例13
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="flex: 1">111111111111111</div>
+    <div class="item" >222222222222222</div>
+    <div class="item" >333333333333333</div>
+  </div>
+  <pre class="green">
+    <span id="part-14">范例14:</span>
+      <span class="use">改变浏览器窗口大小，观察item的border，在container宽度变小到一定程度会产生伸缩</span>
+      <span class="use">flex: initial = flex: 0 1 auto</span>
+      div.container
+        display: flex
+      div.item
+        flex: initial
+        margin-right: 100px
+  </pre>
+  <div class="red container" style="display:flex;">
+    <span class="tag">
+      范例14
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="flex:initial;margin-right:100px">111111111111111111111111111111111111111111111111111111111111</div>
+  </div>
+  <pre class="green">
+    <span id="part-15">范例15:</span>
+      <span class="use">flex: auto  = flex: 1 1 auto</span>
+      div.container
+        display: flex
+      div.item
+        flex: auto
+  </pre>
+  <div class="red container" style="display:flex;">
+    <span class="tag">
+      范例15
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="flex: auto;">111111</div>
+    <div class="item"  style="flex: auto;">222222</div>
+  </div>
+  <pre class="green">
+    <span id="part-16">范例16:</span>
+      <span class="use">flex: none == flex: 0 0 auto</span>
+      div.container
+        display: flex
+      div.item
+        flex: none
+  </pre>
+   <div class="red container" style="display:flex;">
+    <span class="tag">
+      范例16
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="flex: none;">111111</div>
+    <div class="item"  style="flex: none;">222222</div>
+  </div>
+  <pre class="green">
+    <span id="part-17">范例17:</span>
+      <span class="use">flex: 1</span>
+      div.container
+        display: flex
+      div.item-1111
+        flex: 1
+      div.item-222
+        flex: 2
+  </pre>
+  <div class="red container" style="display:flex">
+    <span class="tag">
+      范例17
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="flex: 1">1111111111</div>
+    <div class="item" style="flex: 2">2222222222</div>
+  </div>
+  <pre class="green">
+    <span id="part-17.5">范例17.5</span>
+      <span class="use">这里补充一个小技巧，margin-left: auto</span>
+      div.container
+        display: flex
+      div.item-1111
+        none
+      div.item-2222
+        none
+      div.item-3333
+        margin-left: auto
+      能够使某个子元素靠右
+  </pre>
+  <div class="red container" style="display:flex">
+    <span class="tag">
+      范例17.5
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item" >2222222222</div>
+    <div class="item" style="margin-left: auto">3333333333</div>
+  </div>
+  <pre class="red">
+    <span class="use">justify-content,主轴对齐</span>
+    <span class="use">flex-start | flex-end | center | space-between | space-around, 取值</span>
+    用来设置伸缩容器内的子元素对齐方式， 注意是伸缩容器内 的  子元素 ，子元素。
+  </pre>
+  <pre class="green">
+    <span id="part-18">范例18:</span>
+      <span class="use">justify-content: flex-start</span>
+      div.container
+        justify-content: flex-start
+      div.item
+        none
+  </pre>
+  <div class="red container" style="display:flex;justify-content:flex-start;">
+    <span class="tag">
+      范例18
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-19">范例19:</span>
+      <span class="use">justify-content: flex-end</span>
+      div.container
+        justify-content: flex-end
+      div.item
+        none
+  </pre>
+  <div class="red container" style="display:flex;justify-content:flex-end;">
+    <span class="tag">
+      范例19
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-20">范例20:</span>
+      <span class="use">justify-content: center</span>
+        div.container
+          justify-content: center
+        div.item
+          none
+  </pre>
+  <div class="red container" style="display:flex;justify-content:center;">
+    <span class="tag">
+      范例20
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-21">范例21:</span>
+      <span class="use">justify-content: space-between</span>
+        div.container
+          justify-content: space-between
+        div.item
+          none
+  </pre>
+  <div class="red container" style="display:flex;justify-content:space-between;">
+    <span class="tag">
+      范例21
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-22">范例22:</span>
+      <span class="use">justify-content: space-around</span>
+        div.container
+          justify-content: space-around
+        div.item
+          none
+  </pre>
+  <div class="red container" style="display:flex;justify-content:space-around;">
+    <span class="tag">
+      范例22
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="red">
+    <span class="use">align-items</span>
+    <span class="use">侧轴对齐，表示子元素在与主轴垂直方向上的对齐方式</span>
+    <span class="use">属性是赋给伸缩容器的</span>
+    <span class="use">容器的垂直方向应当是由高度的，这个条件是非必须的，看情况，有东西撑起这个高度也是可以的</span>
+    <span class="use">其默认值为stretch</span>
+    <span class="use">flex-start || flex-end || center || baseline || stretch</span>
+  </pre>
+  <pre class="green">
+    <span id="part-23">范例23:</span>
+
+      <span class="use">align-items: flex-start</span>
+      div.container
+        display: flex
+        align-items: flex-start
+        height: 200px
+      div.item-1111
+        height: 50px
+      div.item-2222
+        height: 70px
+      div.item-3333
+        height: 90px
+      div.item-4444
+        height: 100px
+  </pre>
+  <div class="red container" style="display:flex;align-items: flex-start;height:200px">
+    <span class="tag">
+      范例23
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="height: 50px">1111111111</div>
+    <div class="item" style="height: 70px">2222222222</div>
+    <div class="item" style="height: 90px">3333333333</div>
+    <div class="item" style="height: 100px">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-24">范例24:</span>
+      <span class="use">align-items: flex-end</span>
+      div.container
+        display: flex
+        align-items: flex-end
+        height: 200px
+      div.item-1111
+        height: 50px
+      div.item-2222
+        height: 70px
+      div.item-3333
+        height: 90px
+      div.item-4444
+        height: 100px
+  </pre>
+  <div class="red container" style="display:flex;align-items: flex-end;height:200px">
+    <span class="tag">
+      范例24
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="height: 50px">1111111111</div>
+    <div class="item" style="height: 70px">2222222222</div>
+    <div class="item" style="height: 90px">3333333333</div>
+    <div class="item" style="height: 100px">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-25">范例25:</span>
+      <span class="use">align-items: center</span>
+      div.container
+        display: flex
+        align-items: center
+        height: 200px
+      div.item-1111
+        height: 50px
+      div.item-2222
+        height: 70px
+      div.item-3333
+        height: 90px
+      div.item-4444
+        height: 100px
+  </pre>
+  <div class="red container" style="display:flex;align-items: center;height:200px">
+    <span class="tag">
+      范例25
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="height: 50px">1111111111</div>
+    <div class="item" style="height: 70px">2222222222</div>
+    <div class="item" style="height: 90px">3333333333</div>
+    <div class="item" style="height: 100px">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-26">范例26:</span>
+      <span class="use">align-items: baseline</span>
+      <span class="use">baseline 的理解我也不是太清楚</span>
+      <span class="use">这是w3官网别人翻译的解释：</span>
+      <span class="use">如果伸缩盒项目的行内轴与侧轴为同一条，则该值怀'flex-start'等效。</span>
+      <span class="use">其它情况下，该值将参与基线对齐。所有参与该对齐方式的伸缩盒项目将按一定方式排列，</span>
+      <span class="use">首先将它们的基线进行对齐，随后其中基线至其侧轴起始位置的边距边界距离最长的那个项目将紧靠住该行的侧轴起始边界。</span>
+      div.container
+        display: flex
+        align-items: baseline
+        height: 200px
+      div.item-1111
+        height: 50px
+      div.item-2222
+        height: 70px
+      div.item-3333
+        height: 90px
+      div.item-4444
+        height: 100px
+  </pre>
+  <div class="red container" style="display:flex;align-items: baseline;height:200px">
+    <span class="tag">
+      范例26
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="height: 50px">1111111111</div>
+    <div class="item" style="height: 70px">2222222222</div>
+    <div class="item" style="height: 90px">3333333333</div>
+    <div class="item" style="height: 100px">4444444444</div>
+  </div>
+   <pre class="green">
+    <span id="part-27">范例27:</span>
+      <span class="use">align-items: stretch， 也是默认值</span>
+      <span class="use">比较直白的解释就是 拉伸吧</span>
+      div.container
+        display: flex
+        align-items: center
+        height: 200px
+      div.item
+        none
+  </pre>
+  <div class="red container" style="display:flex;align-items:stretch;height:200px">
+    <span class="tag">
+      范例27
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="red">
+    <span class="use">align-self</span>
+    <span class="use">flex-start || center || flex-end || stretch</span>
+    <span class="use">表示子元素忽略伸缩容器的对齐方式，使用自己的对齐方式</span>
+    <span class="use">就是指假设伸缩容器设置了align-items: flex-start, 然后其中一些子元素想自定自己在改容器中的特殊对齐方式</span>
+  </pre>
+  <pre class="green">
+    <span id="part-28">范例28:</span>
+      div.container
+        display: flex
+        align-items: flex-start
+      div.item-1111
+        height: 50px
+      div.item-2222
+        height: 70px
+        align-self: center
+      div.item-3333
+        height: 90px
+        align-self: end
+      div.item-4444
+        align-slef: stretch
+  </pre>
+  <div class="red container" style="display:flex;align-items: flex-start;height:200px">
+    <span class="tag">
+      范例28
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item" style="height: 50px">1111111111</div>
+    <div class="item" style="height: 70px;align-self: center">2222222222</div>
+    <div class="item" style="height: 90px;align-self: flex-end">3333333333</div>
+    <div class="item" style="align-self: stretch">4444444444</div>
+  </div>
+  <pre class="red">
+    <span class="use">align-content</span>
+    <span class="use">设置于伸缩容器，将用于伸缩容器的 行 进行对齐</span>
+    <span class="use">属性值于justify-content 一样, 其实功能上是有一些类似的</span>
+    <span class="use">注意，该属性生效的前提是子元素的行宽超出了伸缩容器的宽度，所以在伸缩容器中需要指定换行的属性,</span>
+    <span class="use">正常情况下意味着伸缩容器需要有宽高</span>
+  </pre>
+  <pre class="green">
+    <span id="part-29">范例29:</span>
+      <span class="use">我们先来试一下，直接对伸缩容器设置align-content</span>
+        div.container
+          display: flex
+          align-content: flex-start
+          height: 200px
+          width: 300px
+        div.item
+          none
+      <span class="use">我们会发现没有任何效果，子元素拉伸效果是因为伸缩容器的默认值 align-items: stretch</span>
+  </pre>
+  <div class="red container" style="display:flex;align-content:flex-start;height: 200px;width: 300px">
+    <span class="tag">
+      范例29
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-30">范例30:</span>
+      <span class="use">接下来我们为伸缩容器加入换行属性</span>
+      <span class="use">align-content: flex-start</span>
+        div.container
+          display: flex
+          flex-flow: row wrap
+          align-content: flex-start
+          height: 200px
+          width: 300px
+  </pre>
+  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:flex-start;height:200px;width: 300px" >
+    <span class="tag">
+      范例30
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-31">范例31:</span>
+      <span class="use">align-content: flex-end</span>
+        div.container
+          display: flex
+          flex-flow: row wrap
+          align-content: flex-end
+          height: 200px
+          width: 300px
+  </pre>
+  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:flex-end;height:200px;width: 300px" >
+    <span class="tag">
+      范例31
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+   <pre class="green">
+    <span id="part-32">范例32:</span>
+      <span class="use">align-content: center</span>
+        div.container
+          display: flex
+          flex-flow: row wrap
+          align-content: center
+          height: 200px
+          width: 300px
+  </pre>
+  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:center;height:200px;width: 300px" >
+    <span class="tag">
+      范例32
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+   <pre class="green">
+    <span id="part-33">范例33:</span>
+      <span class="use">align-content: baseline</span>
+        div.container
+          display: flex
+          flex-flow: row wrap
+          align-content: baseline
+          height: 200px
+          width: 300px
+  </pre>
+  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:baseline;height:200px;width: 300px" >
+    <span class="tag">
+      范例33
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+   <pre class="green">
+    <span id="part-34">范例34:</span>
+      <span class="use">align-content: stretch</span>
+        div.container
+          display: flex
+          flex-flow: row wrap
+          align-content: stretch
+          height: 200px
+          width: 300px
+  </pre>
+  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:stretch;height:200px;width: 300px" >
+    <span class="tag">
+      范例34
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">1111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+   <pre class="green">
+    <span id="part-35">范例35:</span>
+      <span class="use">align-content: space-around</span>
+        div.container
+          display: flex
+          flex-flow: row wrap
+          align-content: space-around
+          height: 200px
+          width: 300px
+  </pre>
+  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:space-around;height:200px;width: 300px" >
+    <span class="tag">
+      范例35
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111111111111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre class="green">
+    <span id="part-36">范例36:</span>
+      <span class="use">align-content: space-between</span>
+        div.container
+          display: flex
+          flex-flow: row wrap
+          align-content: space-between
+          height: 200px
+          width: 300px
+  </pre>
+  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:space-between;height:200px;width: 300px" >
+    <span class="tag">
+      范例36
+    </span>
+    <span class="sign">Arvo: https://github.com/ArvoGuo</span>
+    <div class="item">111111111111111111111111111111</div>
+    <div class="item">2222222222</div>
+    <div class="item">3333333333</div>
+    <div class="item">4444444444</div>
+  </div>
+  <pre>
+    <span class="use">感谢，如发现问题，请及时与我取得联系，或于github上提交request，欢迎讨论。</span>
+    <span class="use">参考资料</span>
+    <a href="http://www.w3cplus.com/blog/666.html" target="_blank">http://www.w3cplus.com/blog/666.html</a>
+    <a href="http://www.w3.org/html/ig/zh/wiki/Css3-flexbox" target="_blank">http://www.w3.org/html/ig/zh/wiki/Css3-flexbox</a>
+  </pre>
+
+
+</body>
+</html>

@@ -14,7 +14,7 @@
     font-family: 微软雅黑;
     font-size: 15px;
   }
-  .container {
+  .container-arvo {
     position: relative;
     margin-bottom: 20px;
   }
@@ -52,8 +52,10 @@
     -webkit-transform: translateX(-50%) translateY(-50%) rotate(-10deg);
   }
   pre {
+
     position: relative;
     background-color: rgba(10,194,210,.8);
+    border-radius: 5px;
     border-top: 10px solid rgba(92, 117, 169, 1);
     color: #fff;
     padding: 20px 10px 5px;
@@ -80,7 +82,7 @@
   <pre>
     说明: <span class="red">红色表示容器</span>，<span class="blue">蓝色表示容器中的子元素</span>
           通用元素的类
-          .container {
+          .container-arvo {
             margin-bottom: 20px;
           }
           .red {
@@ -142,7 +144,7 @@
   </pre>
   <pre class="green">
     第一种方式:
-      div.container
+      div.container-arvo
         display: flex
         width: 100%
         height: 200px
@@ -151,12 +153,12 @@
       div.div.item
         none
   </pre>
-  <div class="red container" style="display: flex; width: 100%;height: 200px;justify-content:center;align-items: center">
+  <div class="red container-arvo" style="display: flex; width: 100%;height: 200px;justify-content:center;align-items: center">
     <div class="item">我的英文名字叫Arvo</div>
   </div>
   <pre class="green">
     第二种方式
-      div.container
+      div.container-arvo
         display: flex
         width: 100%
         height: 200px
@@ -164,7 +166,7 @@
       div.item
         align-self: center
   </pre>
-  <div class="red container" style="display: flex; width: 100%;height: 200px;justify-content:center;">
+  <div class="red container-arvo" style="display: flex; width: 100%;height: 200px;justify-content:center;">
     <div class="item" style="align-self:center">我的英文名字叫Arvo<br>我的英文名字叫Arvo</div>
   </div>
   <pre class="red">
@@ -173,12 +175,12 @@
   <pre class="green">
     <span id="part-1">范例1:</span>
       正常容器效果
-      div.container
+      div.container-arvo
         display: block
       div.item*5
         none
   </pre>
-  <div class="red container" style="display: block">
+  <div class="red container-arvo" style="display: block">
     <span class="tag">
       范例1
     </span>
@@ -193,12 +195,12 @@
     <span id="part-2">范例2:</span>
       <span class="use">display: flex</span>
       使容器成为伸缩容器
-      div.container
+      div.container-arvo
         display: flex
       div.item*5
         none
   </pre>
-  <div class="red container" style="display: flex">
+  <div class="red container-arvo" style="display: flex">
     <span class="tag">
       范例2
     </span>
@@ -219,13 +221,13 @@
     <span id="part-3">范例3:</span>
       <span class="use">flex-direction: row , 表示水平方向</span>
       为伸缩容器加入主轴方向
-      div.container
+      div.container-arvo
         display: flex;
         flex-direction:: row
       div.item*5
         none
   </pre>
-  <div class="red container" style="display: flex;flex-direction: row">
+  <div class="red container-arvo" style="display: flex;flex-direction: row">
     <span class="tag">
       范例3
     </span>
@@ -240,13 +242,13 @@
     <span id="part-4">范例4:</span>
       <span class="use">flex-direction: row-reverse , 表示水平相反方向</span>
       为伸缩容器加入主轴方向
-      div.container
+      div.container-arvo
         display: flex
         flex-direction: row-reverse
       div.item*5
         none
   </pre>
-  <div class="red container" style="display: flex;flex-direction: row-reverse">
+  <div class="red container-arvo" style="display: flex;flex-direction: row-reverse">
     <span class="tag">
       范例4
     </span>
@@ -261,13 +263,13 @@
     <span id="part-5">范例5:</span>
       <span class="use">flex-direction: column, 表示垂直方向</span>
       为伸缩容器加入主轴方向
-      div.container
+      div.container-arvo
         display: flex
         flex-direction: column
       div.item*5
         none
   </pre>
-  <div class="red container" style="display: flex;flex-direction: column">
+  <div class="red container-arvo" style="display: flex;flex-direction: column">
     <span class="tag">
       范例5
     </span>
@@ -282,13 +284,13 @@
     <span id="part-6">范例6:</span>
       <span class="use">flex-direction: column-reverse, 表示垂直相反方向</span>
       为伸缩容器加入主轴方向
-      div.container
+      div.container-arvo
         display: flex
         flex-direction: column-reverse
       div.item*5
         none
   </pre>
-  <div class="red container" style="display: flex;flex-direction: column-reverse">
+  <div class="red container-arvo" style="display: flex;flex-direction: column-reverse">
     <span class="tag">
       范例6
     </span>
@@ -309,13 +311,13 @@
   </pre>
   <pre class="green">
     <span id="part-7">范例7:</span>
-      div.container
+      div.container-arvo
         display: flex
         flex-direction: row
         flex-wrap: wrap
         width: 400px
   </pre>
-  <div class="red container" style="display: flex;flex-direction: row;flex-wrap:wrap;width: 400px">
+  <div class="red container-arvo" style="display: flex;flex-direction: row;flex-wrap:wrap;width: 400px">
     <span class="tag">
       范例7
     </span>
@@ -328,13 +330,13 @@
   </div>
   <pre class="green">
     <span id="part-8">范例8:</span>
-      div.container
+      div.container-arvo
         display: flex
         flex-direction: row
         flex-wrap: wrap-reverse
         width: 400px
   </pre>
-  <div class="red container" style="display: flex;flex-direction: row;flex-wrap:wrap-reverse;width: 400px">
+  <div class="red container-arvo" style="display: flex;flex-direction: row;flex-wrap:wrap-reverse;width: 400px">
     <span class="tag">
       范例8
     </span>
@@ -347,13 +349,13 @@
   </div>
   <pre class="green">
     <span id="part-9">范例9:</span>
-      div.container
+      div.container-arvo
         display: flex
         flex-direction: column
         flex-wrap: wrap
         height: 80px
   </pre>
-  <div class="red container" style="display: flex;flex-direction: column;flex-wrap:wrap;height: 80px">
+  <div class="red container-arvo" style="display: flex;flex-direction: column;flex-wrap:wrap;height: 80px">
     <span class="tag">
       范例9
     </span>
@@ -366,13 +368,13 @@
   </div>
   <pre class="green">
     <span id="part-10">范例10:</span>
-      div.container
+      div.container-arvo
         display: flex
         flex-direction: column
         flex-wrap: wrap-reverse
         height: 80px
   </pre>
-  <div class="red container" style="display: flex;flex-direction: column;flex-wrap:wrap-reverse;height: 80px">
+  <div class="red container-arvo" style="display: flex;flex-direction: column;flex-wrap:wrap-reverse;height: 80px">
     <span class="tag">
       范例10
     </span>
@@ -392,12 +394,12 @@
   <pre class="green">
     <span id="part-11">范例11:</span>
       <span class="use">flex-flow: column wrap</span>
-      div.container
+      div.container-arvo
         display: flex
         flex-flow: column wrap
         height: 80px
   </pre>
-  <div class="red container" style="display: flex;flex-flow:column wrap; height: 80px">
+  <div class="red container-arvo" style="display: flex;flex-flow:column wrap; height: 80px">
     <span class="tag">
       范例11
     </span>
@@ -413,7 +415,7 @@
   </pre>
   <pre class="green">
     <span id="part-12">范例12:</span>
-      div.container
+      div.container-arvo
         display: flex
       div.item-1111
         order: 3
@@ -422,7 +424,7 @@
       div.item-3333
         order: 1
   </pre>
-  <div class="red container" style="display: flex;">
+  <div class="red container-arvo" style="display: flex;">
     <span class="tag">
       范例12
     </span>
@@ -443,7 +445,7 @@
   <pre class="green">
     <span id="part-13">范例13:</span>
       <span class="use">比较常用的是在子元素上加 flex: 1,该元素会充分利用剩余空间</span>
-      div.container
+      div.container-arvo
         display: flex
       div.item-1111
         flex: 1
@@ -452,7 +454,7 @@
       div.item-3333
         none
   </pre>
-  <div class="red container" style="display: flex;">
+  <div class="red container-arvo" style="display: flex;">
     <span class="tag">
       范例13
     </span>
@@ -463,15 +465,15 @@
   </div>
   <pre class="green">
     <span id="part-14">范例14:</span>
-      <span class="use">改变浏览器窗口大小，观察item的border，在container宽度变小到一定程度会产生伸缩</span>
+      <span class="use">改变浏览器窗口大小，观察item的border，在container-arvo宽度变小到一定程度会产生伸缩</span>
       <span class="use">flex: initial = flex: 0 1 auto</span>
-      div.container
+      div.container-arvo
         display: flex
       div.item
         flex: initial
         margin-right: 100px
   </pre>
-  <div class="red container" style="display:flex;">
+  <div class="red container-arvo" style="display:flex;">
     <span class="tag">
       范例14
     </span>
@@ -481,12 +483,12 @@
   <pre class="green">
     <span id="part-15">范例15:</span>
       <span class="use">flex: auto  = flex: 1 1 auto</span>
-      div.container
+      div.container-arvo
         display: flex
       div.item
         flex: auto
   </pre>
-  <div class="red container" style="display:flex;">
+  <div class="red container-arvo" style="display:flex;">
     <span class="tag">
       范例15
     </span>
@@ -497,12 +499,12 @@
   <pre class="green">
     <span id="part-16">范例16:</span>
       <span class="use">flex: none == flex: 0 0 auto</span>
-      div.container
+      div.container-arvo
         display: flex
       div.item
         flex: none
   </pre>
-   <div class="red container" style="display:flex;">
+   <div class="red container-arvo" style="display:flex;">
     <span class="tag">
       范例16
     </span>
@@ -513,14 +515,14 @@
   <pre class="green">
     <span id="part-17">范例17:</span>
       <span class="use">flex: 1</span>
-      div.container
+      div.container-arvo
         display: flex
       div.item-1111
         flex: 1
       div.item-222
         flex: 2
   </pre>
-  <div class="red container" style="display:flex">
+  <div class="red container-arvo" style="display:flex">
     <span class="tag">
       范例17
     </span>
@@ -531,7 +533,7 @@
   <pre class="green">
     <span id="part-17.5">范例17.5</span>
       <span class="use">这里补充一个小技巧，margin-left: auto</span>
-      div.container
+      div.container-arvo
         display: flex
       div.item-1111
         none
@@ -541,7 +543,7 @@
         margin-left: auto
       能够使某个子元素靠右
   </pre>
-  <div class="red container" style="display:flex">
+  <div class="red container-arvo" style="display:flex">
     <span class="tag">
       范例17.5
     </span>
@@ -558,12 +560,12 @@
   <pre class="green">
     <span id="part-18">范例18:</span>
       <span class="use">justify-content: flex-start</span>
-      div.container
+      div.container-arvo
         justify-content: flex-start
       div.item
         none
   </pre>
-  <div class="red container" style="display:flex;justify-content:flex-start;">
+  <div class="red container-arvo" style="display:flex;justify-content:flex-start;">
     <span class="tag">
       范例18
     </span>
@@ -576,12 +578,12 @@
   <pre class="green">
     <span id="part-19">范例19:</span>
       <span class="use">justify-content: flex-end</span>
-      div.container
+      div.container-arvo
         justify-content: flex-end
       div.item
         none
   </pre>
-  <div class="red container" style="display:flex;justify-content:flex-end;">
+  <div class="red container-arvo" style="display:flex;justify-content:flex-end;">
     <span class="tag">
       范例19
     </span>
@@ -594,12 +596,12 @@
   <pre class="green">
     <span id="part-20">范例20:</span>
       <span class="use">justify-content: center</span>
-        div.container
+        div.container-arvo
           justify-content: center
         div.item
           none
   </pre>
-  <div class="red container" style="display:flex;justify-content:center;">
+  <div class="red container-arvo" style="display:flex;justify-content:center;">
     <span class="tag">
       范例20
     </span>
@@ -612,12 +614,12 @@
   <pre class="green">
     <span id="part-21">范例21:</span>
       <span class="use">justify-content: space-between</span>
-        div.container
+        div.container-arvo
           justify-content: space-between
         div.item
           none
   </pre>
-  <div class="red container" style="display:flex;justify-content:space-between;">
+  <div class="red container-arvo" style="display:flex;justify-content:space-between;">
     <span class="tag">
       范例21
     </span>
@@ -630,12 +632,12 @@
   <pre class="green">
     <span id="part-22">范例22:</span>
       <span class="use">justify-content: space-around</span>
-        div.container
+        div.container-arvo
           justify-content: space-around
         div.item
           none
   </pre>
-  <div class="red container" style="display:flex;justify-content:space-around;">
+  <div class="red container-arvo" style="display:flex;justify-content:space-around;">
     <span class="tag">
       范例22
     </span>
@@ -657,7 +659,7 @@
     <span id="part-23">范例23:</span>
 
       <span class="use">align-items: flex-start</span>
-      div.container
+      div.container-arvo
         display: flex
         align-items: flex-start
         height: 200px
@@ -670,7 +672,7 @@
       div.item-4444
         height: 100px
   </pre>
-  <div class="red container" style="display:flex;align-items: flex-start;height:200px">
+  <div class="red container-arvo" style="display:flex;align-items: flex-start;height:200px">
     <span class="tag">
       范例23
     </span>
@@ -683,7 +685,7 @@
   <pre class="green">
     <span id="part-24">范例24:</span>
       <span class="use">align-items: flex-end</span>
-      div.container
+      div.container-arvo
         display: flex
         align-items: flex-end
         height: 200px
@@ -696,7 +698,7 @@
       div.item-4444
         height: 100px
   </pre>
-  <div class="red container" style="display:flex;align-items: flex-end;height:200px">
+  <div class="red container-arvo" style="display:flex;align-items: flex-end;height:200px">
     <span class="tag">
       范例24
     </span>
@@ -709,7 +711,7 @@
   <pre class="green">
     <span id="part-25">范例25:</span>
       <span class="use">align-items: center</span>
-      div.container
+      div.container-arvo
         display: flex
         align-items: center
         height: 200px
@@ -722,7 +724,7 @@
       div.item-4444
         height: 100px
   </pre>
-  <div class="red container" style="display:flex;align-items: center;height:200px">
+  <div class="red container-arvo" style="display:flex;align-items: center;height:200px">
     <span class="tag">
       范例25
     </span>
@@ -740,7 +742,7 @@
       <span class="use">如果伸缩盒项目的行内轴与侧轴为同一条，则该值怀'flex-start'等效。</span>
       <span class="use">其它情况下，该值将参与基线对齐。所有参与该对齐方式的伸缩盒项目将按一定方式排列，</span>
       <span class="use">首先将它们的基线进行对齐，随后其中基线至其侧轴起始位置的边距边界距离最长的那个项目将紧靠住该行的侧轴起始边界。</span>
-      div.container
+      div.container-arvo
         display: flex
         align-items: baseline
         height: 200px
@@ -753,7 +755,7 @@
       div.item-4444
         height: 100px
   </pre>
-  <div class="red container" style="display:flex;align-items: baseline;height:200px">
+  <div class="red container-arvo" style="display:flex;align-items: baseline;height:200px">
     <span class="tag">
       范例26
     </span>
@@ -767,14 +769,14 @@
     <span id="part-27">范例27:</span>
       <span class="use">align-items: stretch， 也是默认值</span>
       <span class="use">比较直白的解释就是 拉伸吧</span>
-      div.container
+      div.container-arvo
         display: flex
         align-items: center
         height: 200px
       div.item
         none
   </pre>
-  <div class="red container" style="display:flex;align-items:stretch;height:200px">
+  <div class="red container-arvo" style="display:flex;align-items:stretch;height:200px">
     <span class="tag">
       范例27
     </span>
@@ -792,7 +794,7 @@
   </pre>
   <pre class="green">
     <span id="part-28">范例28:</span>
-      div.container
+      div.container-arvo
         display: flex
         align-items: flex-start
       div.item-1111
@@ -806,7 +808,7 @@
       div.item-4444
         align-slef: stretch
   </pre>
-  <div class="red container" style="display:flex;align-items: flex-start;height:200px">
+  <div class="red container-arvo" style="display:flex;align-items: flex-start;height:200px">
     <span class="tag">
       范例28
     </span>
@@ -826,7 +828,7 @@
   <pre class="green">
     <span id="part-29">范例29:</span>
       <span class="use">我们先来试一下，直接对伸缩容器设置align-content</span>
-        div.container
+        div.container-arvo
           display: flex
           align-content: flex-start
           height: 200px
@@ -835,7 +837,7 @@
           none
       <span class="use">我们会发现没有任何效果，子元素拉伸效果是因为伸缩容器的默认值 align-items: stretch</span>
   </pre>
-  <div class="red container" style="display:flex;align-content:flex-start;height: 200px;width: 300px">
+  <div class="red container-arvo" style="display:flex;align-content:flex-start;height: 200px;width: 300px">
     <span class="tag">
       范例29
     </span>
@@ -849,14 +851,14 @@
     <span id="part-30">范例30:</span>
       <span class="use">接下来我们为伸缩容器加入换行属性</span>
       <span class="use">align-content: flex-start</span>
-        div.container
+        div.container-arvo
           display: flex
           flex-flow: row wrap
           align-content: flex-start
           height: 200px
           width: 300px
   </pre>
-  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:flex-start;height:200px;width: 300px" >
+  <div class="red container-arvo" style="display:flex;flex-flow: row wrap;align-content:flex-start;height:200px;width: 300px" >
     <span class="tag">
       范例30
     </span>
@@ -869,14 +871,14 @@
   <pre class="green">
     <span id="part-31">范例31:</span>
       <span class="use">align-content: flex-end</span>
-        div.container
+        div.container-arvo
           display: flex
           flex-flow: row wrap
           align-content: flex-end
           height: 200px
           width: 300px
   </pre>
-  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:flex-end;height:200px;width: 300px" >
+  <div class="red container-arvo" style="display:flex;flex-flow: row wrap;align-content:flex-end;height:200px;width: 300px" >
     <span class="tag">
       范例31
     </span>
@@ -889,14 +891,14 @@
    <pre class="green">
     <span id="part-32">范例32:</span>
       <span class="use">align-content: center</span>
-        div.container
+        div.container-arvo
           display: flex
           flex-flow: row wrap
           align-content: center
           height: 200px
           width: 300px
   </pre>
-  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:center;height:200px;width: 300px" >
+  <div class="red container-arvo" style="display:flex;flex-flow: row wrap;align-content:center;height:200px;width: 300px" >
     <span class="tag">
       范例32
     </span>
@@ -909,14 +911,14 @@
    <pre class="green">
     <span id="part-33">范例33:</span>
       <span class="use">align-content: baseline</span>
-        div.container
+        div.container-arvo
           display: flex
           flex-flow: row wrap
           align-content: baseline
           height: 200px
           width: 300px
   </pre>
-  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:baseline;height:200px;width: 300px" >
+  <div class="red container-arvo" style="display:flex;flex-flow: row wrap;align-content:baseline;height:200px;width: 300px" >
     <span class="tag">
       范例33
     </span>
@@ -929,14 +931,14 @@
    <pre class="green">
     <span id="part-34">范例34:</span>
       <span class="use">align-content: stretch</span>
-        div.container
+        div.container-arvo
           display: flex
           flex-flow: row wrap
           align-content: stretch
           height: 200px
           width: 300px
   </pre>
-  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:stretch;height:200px;width: 300px" >
+  <div class="red container-arvo" style="display:flex;flex-flow: row wrap;align-content:stretch;height:200px;width: 300px" >
     <span class="tag">
       范例34
     </span>
@@ -949,14 +951,14 @@
    <pre class="green">
     <span id="part-35">范例35:</span>
       <span class="use">align-content: space-around</span>
-        div.container
+        div.container-arvo
           display: flex
           flex-flow: row wrap
           align-content: space-around
           height: 200px
           width: 300px
   </pre>
-  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:space-around;height:200px;width: 300px" >
+  <div class="red container-arvo" style="display:flex;flex-flow: row wrap;align-content:space-around;height:200px;width: 300px" >
     <span class="tag">
       范例35
     </span>
@@ -969,14 +971,14 @@
   <pre class="green">
     <span id="part-36">范例36:</span>
       <span class="use">align-content: space-between</span>
-        div.container
+        div.container-arvo
           display: flex
           flex-flow: row wrap
           align-content: space-between
           height: 200px
           width: 300px
   </pre>
-  <div class="red container" style="display:flex;flex-flow: row wrap;align-content:space-between;height:200px;width: 300px" >
+  <div class="red container-arvo" style="display:flex;flex-flow: row wrap;align-content:space-between;height:200px;width: 300px" >
     <span class="tag">
       范例36
     </span>
